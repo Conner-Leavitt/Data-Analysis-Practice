@@ -1,0 +1,123 @@
+
+# coding: utf-8
+
+# # Pandas Practice/Tutorial
+
+# In this notebook I will dissect the Pandas library to give myself additional practice as well as to provide you with a brief walk through on the uses of Pandas and why you want it in your data toolbox.
+
+# # Importing Appropriate Packages
+
+# One of the reasons Python is such a popular programming tool is due to the fact that it you can create an efficient enviroment where the only packages included in your project are those essential to the story you want to tell during your Analysis or Machine Learning project. So before you begin any relavant study in python you will want to download the ncessary packages. 
+# 
+# 1)Import pandas (kinda important since thats what we will be practicing/learning)
+# 
+# 2)Import a visualization package like matplotlib
+
+# In[1]:
+
+
+#import pandas as pd (allowing us to just type pd to represent pandas library)
+import pandas as pd
+#import matplotlib for visualiztion 
+import matplotlib.pyplot as plt
+#we want to render our plots inline so we will import the following:
+get_ipython().magic('matplotlib inline')
+
+
+# # Reading in data
+
+# As you may have guessed, getting the dataframe into python is a crucial step in working with your data in python. Data can come in many shapes in forms and python is strong enough to be able to read in a variety of data files. I on the other hand will talk about the most common and easiest to read into python. That being a .csv file. I have gone out of my way to save data files as .csv and have been known to ask people to send me data as a .csv because of how simple it is to read into python. This can't be done in all cases so knowing how to read in other data files is important, but for the sake of time I will only walk through .csv.
+
+# All we need are two things to read in a .csv file. The first is data saved in that format and the second is the "read_csv" function. 
+# I will walk through a couple of steps on what the code is doing that way you do not feel lost in the syntax. 
+# 
+# 1) name your data in python and set it equal to line of code that will read in the data
+# 
+# 2) pd for pandas
+# 
+# 3) then we use our function read_csv to read in the csv file
+# 
+# 4) then with in the parenthesis and quotations you put the location of the file, the name of the file, and end it with a .csv 
+# 
+# 5) now you will be able to just use the name you gave it to bring up in future code
+
+# In[2]:
+
+
+#Reading in kickstarter data (I will be using this data set for the majority of this practice/tutorial)
+ks_data = pd.read_csv("/Users/connerleavitt/Desktop/ks_data")
+
+
+# I am glad we ran into this error because it will allow me to explain a deault setting in python as well as demonstate how to fix it. First we see that the error reads "utf-8" utf-8 is the default setting for python to read in data and it can be changed by specifing what setting you want in your code. if we use "latin1" in place of "utf-8" we will be able to fix our coding error. Lets try. 
+
+# In[3]:
+
+
+#Reading in kickstarter data (with latin1 instead of utf-8)
+ks_data = pd.read_csv("/Users/connerleavitt/Desktop/ks_data.csv", encoding="latin1")
+
+
+# it worked. Now we can move on to some of the most basic functions in the pandas library.
+
+# # Looking at the dataframe
+
+# We can look at the data by just entering the name of the data we gave it when we loaded it in. By doing this we can see the entire dataframe. This is okay when we are working with small data but can be cumbersome with larger datasets. I will show you a way in which we can pull up just few columns as to not cluter the notebook. 
+
+# In[4]:
+
+
+#pulling in the entire dataset
+ks_data
+
+
+# As you can see thats a lot of scrolling. so with large datasets its more practical to only bring up a few columns so that you can extract important features of the data frame like what variables you have and how they are spelled so that you can manipulate the data set in the future. here are the two different ways:
+
+# In[5]:
+
+
+#first we use the .head() function
+ks_data.head()
+
+
+# The other way of bring up a few rows of your data allows for more control, but the .head() function is a quick and easy way of getting the quick view you need.
+
+# In[6]:
+
+
+#the other way of writing the code would be as such:
+ks_data[:3]
+
+
+# By utilizing the [:#] function I am able to specify how many rows I want to view. In this case it was 3. 
+
+# # Specifying Specific Columns
+
+# Lets say you are only interested in looking at a few columns and dont want to bring up the entire dataframe. That can be done as well.
+
+# In[7]:
+
+
+#pulling up one column from the dataset
+ks_data['category']
+
+
+# You can apply this code for more than one column as well.
+
+# In[8]:
+
+
+#multiple columns
+ks_data[['category', 'currency', 'backers']]
+
+
+# Lets try combining our code into one cell. 
+
+# In[9]:
+
+
+#showing that each line of code doesn't need its own cell
+ks_data = pd.read_csv('/Users/connerleavitt/Desktop/ks_data.csv', encoding='latin1')
+ks_data[['category', 'currency', 'backers']][:10]
+
+
+# These are just a few quick ways an analyst or scientist can manipulate sets of data with the pandas library. For more tutorials check out the other notebooks where we will explore more dataframe manipulation, code, and visualiztion.
